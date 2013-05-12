@@ -8,6 +8,10 @@ from django.contrib.auth.models import User
 
 class MainFrame(models.Model):
     name = models.CharField(_('Main Frame'), max_length=50, blank=False)
+    town = models.CharField(_('Town Name'), max_length=50, blank=True)
+    nra = models.CharField(_('NRA / NRO Name'), max_length=50, blank=True)
+    dslam = models.CharField(_('Dslam / Switch Name'), max_length=50, blank=True)
+    ip_adress = models.IPAddressField(_('Dslam / Switch IP Address'), unique=True)
 
     class Meta:
         verbose_name = _('Main frame')
