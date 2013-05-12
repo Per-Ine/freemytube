@@ -2,7 +2,7 @@ from tastypie.resources import ModelResource
 from django.contrib.auth.models import User
 from tastypie import fields
 
-from fmt.models import Location, MainFrame, Video, Measurement
+from core.models import Location, MainFrame, Video, Measurement
 
 class MainFrameResource(ModelResource):
     class Meta:
