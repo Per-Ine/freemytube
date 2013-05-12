@@ -6,12 +6,12 @@ from core.api import MainFrameResource, UserResource, LocationResource, VideoRes
 from django.contrib import admin
 admin.autodiscover()
 
-v1_api = Api(api_name='freemytube')
-v1_api.register(MainFrameResource())
-v1_api.register(UserResource())
-v1_api.register(LocationResource())
-v1_api.register(VideoResource())
-v1_api.register(MeasurementResource())
+freemytube_api = Api(api_name='freemytube')
+freemytube_api(MainFrameResource())
+freemytube_api.register(UserResource())
+freemytube_api.register(LocationResource())
+freemytube_api.register(VideoResource())
+freemytube_api.register(MeasurementResource())
 
 urlpatterns = patterns('',
     # Examples:
@@ -23,5 +23,5 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
-    (r'^api/', include(v1_api.urls)),
+    (r'^api/', include(freemytube_api.urls)),
 )
