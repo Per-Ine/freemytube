@@ -7,7 +7,7 @@ from django.contrib import admin
 admin.autodiscover()
 
 freemytube_api = Api(api_name='freemytube')
-freemytube_api(MainFrameResource())
+freemytube_api.register(MainFrameResource())
 freemytube_api.register(UserResource())
 freemytube_api.register(LocationResource())
 freemytube_api.register(VideoResource())
