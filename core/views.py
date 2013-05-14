@@ -1,9 +1,9 @@
 from django.contrib.auth.models import User, Group
 from django.http import HttpResponse
 
-from core.models import MainFrame
+from core.models import MainFrame, Location
 from core.serializers import UserSerializer, GroupSerializer
-from core.serializers import MainFrameSerializer
+from core.serializers import MainFrameSerializer, LocationSerializer
 
 from rest_framework import viewsets
 from rest_framework.views import APIView
@@ -46,5 +46,16 @@ class ListMainFrames(APIView):
 
         frame = MainFrame.objects.all()
         serializer = MainFrameSerializer(frame, many=True)
+
+        return JSONResponse(serializer.data)
+
+class ListLocation(APIView):
+
+    model = Location
+
+    def get(self, request, format=None):
+
+        location = Location.objects.all()
+        serializer = LocationSerializer(location, many=True)
 
         return JSONResponse(serializer.data)
