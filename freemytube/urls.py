@@ -1,13 +1,15 @@
 from django.conf.urls import patterns, include, url
-from rest_framework import viewsets, routers
-
+from rest_framework import routers
+from core import views
 from core.views import ListMainFrames
 
 # Uncomment the next two lines to enable the admiUserResource, LocationResource, VideoResource, MeasurementResourcen:
 from django.contrib import admin
 admin.autodiscover()
 
-
+router = routers.DefaultRouter()
+router.register(r'users', views.UserViewSet)
+router.register(r'groups', views.GroupViewSet)
 
 urlpatterns = patterns('core.views',
     # Examples:
@@ -19,8 +21,7 @@ urlpatterns = patterns('core.views',
 
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^', include(router.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    url(r'^mainFrame/$', 'core.views.frame_list'),
-    url(r'^mainFrame2/$', ListMainFrames.as_view()),
-    url(r'^mainFrame/(?P<pk>[0-9]+)/$', 'core.views.frame_details'),
+    url(r'^mainFrame/$', ListMainFrames.as_view()),
 )
