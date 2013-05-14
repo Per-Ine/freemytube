@@ -33,7 +33,7 @@ class JSONResponse(HttpResponse):
         else:
             return JSONResponse(serializer.errors, status=400)
 
-    def frame(request, pk):
+    def frame_details(request, pk):
     """
     Retrieve, update or delete a code main frame.
     """
