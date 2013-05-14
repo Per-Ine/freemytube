@@ -7,7 +7,7 @@ admin.autodiscover()
 
 
 
-urlpatterns = patterns('',
+urlpatterns = patterns('core.views',
     # Examples:
     # url(r'^$', 'freemytube.views.home', name='home'),
     # url(r'^freemytube/', include('freemytube.foo.urls')),
@@ -16,8 +16,7 @@ urlpatterns = patterns('',
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
     # Uncomment the next line to enable the admin:
-    #url(r'^core/', include('core.urls')),
-    #url(r'^admin/', include(admin.site.urls)),
+    url(r'^admin/', include(admin.site.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^mainFrame/$', 'core.views.frame_list'),
     url(r'^mainFrame/(?P<pk>[0-9]+)/$', 'core.views.frame_details'),
