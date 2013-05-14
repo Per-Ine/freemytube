@@ -1,19 +1,24 @@
 from django.conf.urls import patterns, include, url
-from tastypie.api import Api
-from core.api import MainFrameResource, UserResource, LocationResource, VideoResource, MeasurementResource
+from django.contrib.auth.models import User, Group
+from rest_framework import viewsets, routers
 
 # Uncomment the next two lines to enable the admiUserResource, LocationResource, VideoResource, MeasurementResourcen:
 from django.contrib import admin
 admin.autodiscover()
 
-freemytube_api = Api(api_name='freemytube')
-freemytube_api.register(MainFrameResource())
-freemytube_api.register(UserResource())
-freemytube_api.register(LocationResource())
-freemytube_api.register(VideoResource())
-freemytube_api.register(MeasurementResource())
+# ViewSets define the view behavior.
+class UserViewSet(viewsets.ModelViewSet):
+    model = User
 
-urlpatterns = patterns('',
+class GroupViewSet(viewsets.ModelViewSet):
+    model = Group
+
+# Routers provide an easy way of automatically determining the URL conf
+router = routers.DefaultRouter()
+router.register(r'users', views.UserViewSet)
+router.register(r'groups', views.GroupViewSet)
+
+urlpatterns = patterns('freemytube.views',
     # Examples:
     # url(r'^$', 'freemytube.views.home', name='home'),
     # url(r'^freemytube/', include('freemytube.foo.urls')),
@@ -23,5 +28,7 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
-    (r'^api/', include(freemytube_api.urls)),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^freemytube/$', 'frame_list'),
+    url(r'^freemytube/(?P<pk>[0-9]+)/$', 'frame_detail'),
 )
