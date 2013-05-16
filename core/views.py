@@ -20,13 +20,13 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
+
 class GroupViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows groups to be viewed or edited.
     """
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
-
 
 
 class JSONResponse(HttpResponse):
@@ -38,6 +38,7 @@ class JSONResponse(HttpResponse):
        kwargs['content_type'] = 'application/json'
        super(JSONResponse, self).__init__(content, **kwargs)
 
+
 class ListMainFrames(APIView):
 
     model = MainFrame
@@ -48,6 +49,7 @@ class ListMainFrames(APIView):
         serializer = MainFrameSerializer(frame, many=True)
 
         return JSONResponse(serializer.data)
+
 
 class ListLocation(APIView):
 
@@ -78,8 +80,8 @@ class UserStats(APIView):
 
     model = Measurement
 
-    def get(self, request, user=None, *args, **kwargs) :
-        user_id = request.GET.get('user')
+    def get(self, request, user_id=None, *args, **kwargs) :
+
         measurement = Measurement.objects.filter(user__id=user_id)
         serializer = MeasurementSerializer(measurement, many=True)
 
