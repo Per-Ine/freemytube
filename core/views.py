@@ -10,7 +10,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
-from rest_framework import permissions
+from rest_framework import status
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -48,26 +48,24 @@ class ListMainFrames(APIView):
         frame = MainFrame.objects.all()
         serializer = MainFrameSerializer(frame, many=True)
 
-        return JSONResponse(serializer.data)
+        return Response(serializer.data)
 
 
 class ListLocation(APIView):
 
     model = Location
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly)
+    #permission_classes = (permissions.IsAuthenticatedOrReadOnly)
 
 
-    def get(self, request, format=None):
-        u = self.request.user
-        location = Location.objects.filter(user=u)
+    def get(self, request, user_id=None, *args, **kwargs):
+        location = Location.objects.filter(user__id=user_id)
         serializer = LocationSerializer(location, many=True)
 
-        return JSONResponse(serializer.data)
+        return Response(serializer.data)
 
-    def post(request, format=None):
-
-        new_data = request.POST
-        serializer = LocationSerializer(new_data, many=True)
+    def post(self, request, *args, **kwargs):
+        data=request.POST
+        serializer = LocationSerializer(data)
 
         if serializer.is_valid():
             serializer.save()

@@ -11,7 +11,7 @@ class MainFrame(models.Model):
     town = models.CharField(_('Town Name'), max_length=50, blank=True)
     nra = models.CharField(_('NRA / NRO Name'), max_length=50, blank=True)
     dslam = models.CharField(_('Dslam / Switch Name'), max_length=50, blank=True)
-    ip_adress = models.CharField(_('Dslam / Switch IP Address'), max_length=50, unique=True)
+    ip_adress = models.IPAddressField(_('Dslam / Switch IP Address'), max_length=50, unique=True)
 
     class Meta:
         verbose_name = _('Main frame')
@@ -23,8 +23,8 @@ class MainFrame(models.Model):
 class Location(models.Model):
     user = models.ForeignKey(User)
     main_frame = models.ForeignKey(MainFrame)  
-    ip_address = models.CharField(_('IP Address'), max_length=50,unique=True)
-    hostname = models.CharField('Resolved hostname', max_length=255, blank=True)
+    ip_address = models.IPAddressField(_('IP Address'), max_length=50,unique=True)
+    hostname = models.CharField(_('Resolved hostname'), max_length=255, blank=True)
     zipcode = models.CharField(_('ZIP Code'), max_length=64, blank=True)
     lon = models.FloatField(_('Longitude'), blank=True, null=True)
     lat = models.FloatField(_('Latitude'), blank=True, null=True)

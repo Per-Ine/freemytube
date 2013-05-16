@@ -24,6 +24,6 @@ urlpatterns = patterns('core.views',
     url(r'^', include(router.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^mainFrame/$', ListMainFrames.as_view()),
-    url(r'^location/$', ListLocation.as_view()),
+    url(r'^location/(?P<user_id>[0-9]+)/$', ListLocation.as_view()),
     url(r'^userStats/(?P<user_id>[0-9]+)/$', UserStats.as_view()),
 )
