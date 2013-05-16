@@ -85,4 +85,4 @@ class UserStats(APIView):
         measurement = Measurement.objects.filter(user__id=user_id)
         serializer = MeasurementSerializer(measurement, many=True)
 
-        return JSONResponse(serializer.data)
+        return Response(serializer.data)
