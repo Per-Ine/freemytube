@@ -19,9 +19,11 @@ class MainFrameSerializer(serializers.ModelSerializer):
         fields = ('name', 'town', 'nra', 'dslam', 'ip_adress')
 
 class LocationSerializer(serializers.ModelSerializer):
+    user = serializers.PrimaryKeyRelatedField(many=False, read_only=True)
+
     class Meta:
         model = Location
-        fields = ('ip_address', 'hostname', 'zipcode', 'lon', 'lat')
+        fields = ('ip_address', 'hostname', 'zipcode', 'lon', 'lat', 'user')
 
 class VideoSerializer(serializers.ModelSerializer):
     class Meta:

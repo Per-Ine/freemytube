@@ -1,8 +1,8 @@
 from django.contrib.auth.models import User, Group
 from django.http import HttpResponse
 
-from core.models import MainFrame, Location, Measurement
-from core.serializers import UserSerializer, GroupSerializer
+from core.models import MainFrame, Location, Measurement, Video
+from core.serializers import UserSerializer, GroupSerializer, VideoSerializer
 from core.serializers import MainFrameSerializer, LocationSerializer, MeasurementSerializer
 
 from rest_framework import viewsets
@@ -57,15 +57,32 @@ class ListLocation(APIView):
     #permission_classes = (permissions.IsAuthenticatedOrReadOnly)
 
 
-    def get(self, request, user_id=None, *args, **kwargs):
+    def get(self, request, user_id=None, format=None):
         location = Location.objects.filter(user__id=user_id)
         serializer = LocationSerializer(location, many=True)
 
         return Response(serializer.data)
 
-    def post(self, request, *args, **kwargs):
-        data=request.POST
-        serializer = LocationSerializer(data)
+    def post(self, request, user_id=None, format=None):
+        data=request.DATA
+        print data
+        serializer = LocationSerializer(data=data)
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class VideoCreateView(APIView):
+
+    model = Video
+
+    def post(self, request, user_id=None, format=None):
+        data=request.DATA
+        print data
+        serializer = VideoSerializer(data=data)
 
         if serializer.is_valid():
             serializer.save()
