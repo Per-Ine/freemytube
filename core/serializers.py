@@ -31,4 +31,4 @@ class VideoSerializer(serializers.ModelSerializer):
 class MeasurementSerializer(serializers.ModelSerializer):
     class Meta:
         model = Measurement
-        fields = ('minimum', 'maximum', 'average', 'start_time', 'end_time', 'file_size')
+        fields = ('user', 'minimum', 'maximum', 'average', 'start_time', 'end_time', 'file_size')

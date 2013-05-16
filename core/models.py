@@ -53,6 +53,7 @@ class Video(models.Model):
 
 class Measurement(models.Model):
     video = models.ForeignKey(Video)
+    user = models.ForeignKey(User)
     location = models.ForeignKey(Location)
     minimum = models.IntegerField(verbose_name=_("Minimum"))
     maximum = models.IntegerField(verbose_name=_("Maximum"))
