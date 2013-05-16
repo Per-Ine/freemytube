@@ -1,7 +1,7 @@
 from django.conf.urls import patterns, include, url
 from rest_framework import routers
 from core import views
-from core.views import ListMainFrames, ListLocation, UserStats
+from core.views import ListMainFrames, ListLocation, UserStats, VideoCreateView
 
 # Uncomment the next two lines to enable the admiUserResource, LocationResource, VideoResource, MeasurementResourcen:
 from django.contrib import admin
@@ -26,4 +26,5 @@ urlpatterns = patterns('core.views',
     url(r'^mainFrame/$', ListMainFrames.as_view()),
     url(r'^location/(?P<user_id>[0-9]+)/$', ListLocation.as_view()),
     url(r'^userStats/(?P<user_id>[0-9]+)/$', UserStats.as_view()),
+    url(r'^video/create/$', VideoCreateView.as_view()),
 )
