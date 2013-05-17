@@ -33,8 +33,7 @@ class Measurement(models.Model):
     start_time = models.DateTimeField(_("Start Time"))
     end_time = models.DateTimeField(_("End Time"))
     file_size = models.IntegerField(_("File Size"), null=True, blank=True)
-    ip_address = models.IPAddressField(_("IP Address"), max_length=50,
-                                       unique=True)
+    ip_address = models.IPAddressField(_("IP Address"), max_length=50)
     lon = models.FloatField(_("Longitude"), blank=True, null=True)
     lat = models.FloatField(_("Latitude"), blank=True, null=True)
 
