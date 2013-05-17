@@ -4,7 +4,6 @@ from django.http import HttpResponse
 from core.models import MainFrame, Location, Measurement, Video
 from core.serializers import UserSerializer, GroupSerializer, VideoSerializer
 from core.serializers import MainFrameSerializer, LocationSerializer, MeasurementSerializer
-from core.permissions import IsOwnerOrReadOnly
 
 from rest_framework import viewsets
 from rest_framework.views import APIView
