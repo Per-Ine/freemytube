@@ -3,28 +3,6 @@ from rest_framework import serializers
 
 from core.models import MainFrame, Video, Measurement
 
-class UserSerializer(serializers.HyperlinkedModelSerializer):
-    videos = serializers.PrimaryKeyRelatedField(many=True)
-
-    class Meta:
-        model = User
-        fields = ('url', 'username', 'email', 'groups', 'videos')
-
-class GroupSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Group
-        fields = ('url', 'name')
-
-class MainFrameSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = MainFrame
-        fields = ('name', 'town', 'nra', 'dslam', 'ip_adress')
-
-class VideoSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Video
-
-        fields = ('video_title', 'video_url')
 
 class MeasurementSerializer(serializers.ModelSerializer):
     class Meta:
