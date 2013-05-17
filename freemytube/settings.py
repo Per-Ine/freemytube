@@ -1,7 +1,7 @@
 # Django settings for freemytube project.
 import os
 
-location = lambda x: os.path.realpath(os.path.join(os.path.dirname(os.path.realpath(__file__)),'..', x))
+location = lambda x: os.path.realpath(os.path.join(os.path.dirname(os.path.realpath(__file__)), '..', x))
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -45,7 +45,7 @@ STATICFILES_DIRS = ()
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    # 'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
 SECRET_KEY = '22=2oc47e@r&3v1p+djh_c(+-dc#lif6q8v3w^wvm0cfug#ymv'
@@ -53,7 +53,7 @@ SECRET_KEY = '22=2oc47e@r&3v1p+djh_c(+-dc#lif6q8v3w^wvm0cfug#ymv'
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.Loader',
+    # 'django.template.loaders.eggs.Loader',
 )
 
 MIDDLEWARE_CLASSES = (
