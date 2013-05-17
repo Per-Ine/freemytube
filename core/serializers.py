@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User, Group
 from rest_framework import serializers
 
-from core.models import MainFrame, Location, Video, Measurement
+from core.models import MainFrame, Video, Measurement
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     videos = serializers.PrimaryKeyRelatedField(many=True)
@@ -19,13 +19,6 @@ class MainFrameSerializer(serializers.ModelSerializer):
     class Meta:
         model = MainFrame
         fields = ('name', 'town', 'nra', 'dslam', 'ip_adress')
-
-class LocationSerializer(serializers.ModelSerializer):
-    user = serializers.PrimaryKeyRelatedField(many=False, read_only=True)
-
-    class Meta:
-        model = Location
-        fields = ('ip_address', 'hostname', 'zipcode', 'lon', 'lat', 'user')
 
 class VideoSerializer(serializers.ModelSerializer):
     class Meta:
