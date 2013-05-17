@@ -4,7 +4,8 @@ from django.contrib.auth.models import User
 
 
 class MainFrame(models.Model):
-    name = models.CharField(_("Main Frame"), max_length=20, blank=False)
+    name = models.CharField(_("Main Frame"), unique=True, max_length=20,
+                            blank=False)
     city = models.CharField(_("City Name"), max_length=100, blank=True)
 
     class Meta:
@@ -33,8 +34,7 @@ class Measurement(models.Model):
     start_time = models.DateTimeField(_("Start Time"))
     end_time = models.DateTimeField(_("End Time"))
     file_size = models.IntegerField(_("File Size"), null=True, blank=True)
-    ip_address = models.IPAddressField(_("IP Address"), max_length=50,
-                                       unique=True)
+    ip_address = models.IPAddressField(_("IP Address"), max_length=50)
     lon = models.FloatField(_("Longitude"), blank=True, null=True)
     lat = models.FloatField(_("Latitude"), blank=True, null=True)
 
