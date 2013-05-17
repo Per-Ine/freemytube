@@ -4,7 +4,8 @@ from django.contrib.auth.models import User
 
 
 class MainFrame(models.Model):
-    name = models.CharField(_("Main Frame"), max_length=20, blank=False)
+    name = models.CharField(_("Main Frame"), unique=True, max_length=20,
+                            blank=False)
     city = models.CharField(_("City Name"), max_length=100, blank=True)
 
     class Meta:
