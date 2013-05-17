@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from core.models import MainFrame, Location, Measurement, Video
 from core.serializers import UserSerializer, GroupSerializer, VideoSerializer
 from core.serializers import MainFrameSerializer, LocationSerializer, MeasurementSerializer
+from core.permissions import IsOwnerOrReadOnly
 
 from rest_framework import viewsets
 from rest_framework.views import APIView
@@ -11,7 +12,7 @@ from rest_framework.response import Response
 from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
 from rest_framework import status
-
+from rest_framework import permissions
 
 class UserViewSet(viewsets.ModelViewSet):
     """
@@ -54,7 +55,6 @@ class ListMainFrames(APIView):
 class ListLocation(APIView):
 
     model = Location
-    #permission_classes = (permissions.IsAuthenticatedOrReadOnly)
 
 
     def get(self, request, user_id=None, format=None):
@@ -77,9 +77,11 @@ class ListLocation(APIView):
 
 class VideoCreateView(APIView):
 
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     model = Video
 
-    def post(self, request, user_id=None, format=None):
+
+    def post(self, request, format=None):
         data=request.DATA
         print data
         serializer = VideoSerializer(data=data)

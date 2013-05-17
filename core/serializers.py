@@ -4,9 +4,11 @@ from rest_framework import serializers
 from core.models import MainFrame, Location, Video, Measurement
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
+    videos = serializers.PrimaryKeyRelatedField(many=True)
+
     class Meta:
         model = User
-        fields = ('url', 'username', 'email', 'groups')
+        fields = ('url', 'username', 'email', 'groups', 'videos')
 
 class GroupSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
@@ -28,6 +30,7 @@ class LocationSerializer(serializers.ModelSerializer):
 class VideoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Video
+
         fields = ('video_title', 'video_url')
 
 class MeasurementSerializer(serializers.ModelSerializer):
