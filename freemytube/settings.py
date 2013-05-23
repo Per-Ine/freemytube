@@ -85,6 +85,8 @@ INSTALLED_APPS = (
     # Third party
     'rest_framework',
 
+    'rest_framework.authtoken',
+    
     # Free My Tube
     'core',
 
@@ -122,6 +124,8 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.BasicAuthentication',
-        'rest_framework.authentication.SessionAuthentication'
+        'rest_framework.authentication.TokenAuthentication'
+    ),
+    'DEFAULT_FILTER_BACKENDS': ('rest_framework.filters.DjangoFilterBackend',
     ),
 }

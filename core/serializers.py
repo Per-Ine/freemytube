@@ -9,8 +9,6 @@ class MeasurementSerializer(serializers.ModelSerializer):
         fields = ('user', 'minimum', 'maximum', 'average', 'start_time',
                   'end_time', 'file_size')
 
-
 class VideoSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Video
-        fields = ('title', 'url')
+	class Meta:
+		model = Video

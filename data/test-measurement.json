@@ -1,14 +1,14 @@
 {
-    "minimum": 345,
-    "maximum": 678,
-    "average": 567,
-    "start_time": "2013-05-17T11:30:09.822",
-    "end_time": "2013-05-17T11:50:09.822",
-    "file_size": 534,
+    "minimum": 211,
+    "maximum": 466,
+    "average": 344,
+    "start_time": "2012-07-20T16:30:09.822",
+    "end_time": "2012-07-20T16:50:09.822",
+    "file_size": 500,
     "ip_address": "88.164.99.249",
     "lon": null,
     "lat": null,
-    "video": 1,
-    "user": 1,
-    "main_frame": 3
+    "video": 2,
+    "user": 3,
+    "main_frame": 2
 }

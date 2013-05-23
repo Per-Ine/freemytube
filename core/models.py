@@ -2,6 +2,11 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import User
 
+from rest_framework.authtoken.models import Token
+
+from django.dispatch import receiver
+from django.db.models.signals import post_save
+
 
 class MainFrame(models.Model):
     name = models.CharField(_("Main Frame"), unique=True, max_length=20,
@@ -48,3 +53,9 @@ class Measurement(models.Model):
 
     def __unicode__(self):
         return u"%s - %s" % (self.user, self.end_time)
+
+
+@receiver(post_save, sender=User)
+def create_auth_token(sender, instance=None, created=False, **kwargs):
+    if created:
+        Token.objects.create(user=instance)

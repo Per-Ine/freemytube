@@ -4,7 +4,8 @@ from django.contrib import admin
 from rest_framework import routers
 
 from core import views
-from core.views import UserMeasurementList, UserVideo
+from core.views import UserMeasurementViewSet, UserMeasurementAdd
+from rest_framework.authtoken.views import obtain_auth_token
 
 
 admin.autodiscover()
@@ -20,7 +21,10 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^api-auth/', include('rest_framework.urls',
                                namespace='rest_framework')),
-    url(r'^measurements/(?P<username>.+)/$', UserMeasurementList.as_view()),
+    url(r'^token-auth/', 'obtain_auth_token'),
+
+    url(r'^measurements/(?P<username>.+)/$', UserMeasurementViewSet.as_view()),
+    url(r'^measurements/add/$', UserMeasurementAdd.as_view()),
+
     url(r'^', include(router.urls)),
-    url(r'^meas/(?P<user_name>\w+)/(?P<video_id>\d+)/$', UserVideo.as_view()),
 )
