@@ -35,23 +35,24 @@ class MeasurementViewSet(viewsets.ModelViewSet):
     model = Measurement
 
 
-class MeasurementFilter(django_filters.FilterSet):
-    min_date = django_filters.DateTimeFilter(lookup_type='gte')
-    max_date = django_filters.DateTimeFilter(lookup_type='lte')
-
-    class Meta:
-        model = Measurement
-        fields = ['user', 'video', 'start_time', 'end_time', 'minimum', 'maximum', 'average']
-
-
 class UserMeasurementViewSet(generics.ListAPIView):
     model = Measurement
     serializer_class = MeasurementSerializer
-    filter_class = MeasurementFilter
 
     def get_queryset(self):
         username = self.kwargs['username']
-        return Measurement.objects.filter(user__username=username)
+        queryset = Measurement.objects.filter(user__username=username)
+        #queryset = queryset.filter(start_time__year='2012')
+
+        s_date = self.request.QUERY_PARAMS.get('start_time', None)
+        if s_date is not None:
+            queryset = queryset.filter(start_time=s_date)
+
+        e_date = self.request.QUERY_PARAMS.get('end_time', None)
+        if e_date is not None:
+            queryset = queryset.filter(end_time=e_date)
+
+        return queryset
 
 
 #________________________________________________________________________#
@@ -59,8 +60,10 @@ class UserMeasurementAdd(generics.CreateAPIView):
     model = Measurement
     serializer_class = MeasurementSerializer
 
-    def post(self):
-        serializer = MeasurementSerializer(data = request.DATA)
+    def post(self, request, *args, **kwargs):
+        data = request.DATA
+        serializer = MeasurementSerializer(data=data)
+
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
