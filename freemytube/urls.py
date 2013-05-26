@@ -5,7 +5,6 @@ from rest_framework import routers
 
 from core import views
 from core.views import UserMeasurementViewSet, UserMeasurementAdd
-from rest_framework.authtoken.views import obtain_auth_token
 
 
 admin.autodiscover()
@@ -19,8 +18,7 @@ router.register(r'measurements', views.MeasurementViewSet)
 
 urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^api-auth/', include('rest_framework.urls',
-                               namespace='rest_framework')),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^token-auth/', 'obtain_auth_token'),
 
     url(r'^measurements/(?P<username>.+)/$', UserMeasurementViewSet.as_view()),

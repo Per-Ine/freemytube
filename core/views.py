@@ -42,7 +42,6 @@ class UserMeasurementViewSet(generics.ListAPIView):
     def get_queryset(self):
         username = self.kwargs['username']
         queryset = Measurement.objects.filter(user__username=username)
-        #queryset = queryset.filter(start_time__year='2012')
 
         s_date = self.request.QUERY_PARAMS.get('start_time', None)
         if s_date is not None:
