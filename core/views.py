@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 
 from core.models import MainFrame, Measurement, Video
-from core.serializers import MeasurementSerializer, VideoSerializer, UserMeasurementSerializer
+from core.serializers import UserMeasurementSerializer
 
 from rest_framework import viewsets, generics
 from rest_framework.views import APIView
@@ -37,7 +37,7 @@ class MeasurementViewSet(viewsets.ModelViewSet):
 
 class UserMeasurementViewSet(generics.ListAPIView):
     model = Measurement
-    serializer_class = MeasurementSerializer
+    serializer_class = UserMeasurementSerializer
 
     def get_queryset(self):
         username = self.kwargs['username']
@@ -57,7 +57,6 @@ class UserMeasurementViewSet(generics.ListAPIView):
 #________________________________________________________________________#
 class UserMeasurementAdd(generics.CreateAPIView):
     model = Measurement
-    serializer_class = MeasurementSerializer
 
     def post(self, request, *args, **kwargs):
         data = request.DATA
