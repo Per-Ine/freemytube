@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 
 from core.models import MainFrame, Measurement, Video
-from core.serializers import MeasurementSerializer, VideoSerializer
+from core.serializers import MeasurementSerializer, VideoSerializer, UserMeasurementSerializer
 
 from rest_framework import viewsets, generics
 from rest_framework.views import APIView
@@ -45,11 +45,11 @@ class UserMeasurementViewSet(generics.ListAPIView):
 
         s_date = self.request.QUERY_PARAMS.get('start_time', None)
         if s_date is not None:
-            queryset = queryset.filter(start_time=s_date)
+            queryset = queryset.filter(start_time__gt=s_date)
 
         e_date = self.request.QUERY_PARAMS.get('end_time', None)
         if e_date is not None:
-            queryset = queryset.filter(end_time=e_date)
+            queryset = queryset.filter(start_time__lt=e_date)
 
         return queryset
 
